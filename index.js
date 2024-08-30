@@ -164,10 +164,10 @@ const resolvers = {
     Query: {
         userCount: () => users.length,
         allUsers: () => users,
-        findUser: (root, args) => users.filter(user => user.name === args.name),
+        findUser: (root, args) => users.filter(user => user.id === args.id),
         allPosts: () => posts,
         findPostsByUser: (root, args) => {
-            const user = users.find(user => user.name === args.name);
+            const user = users.find(user => user.id === args.id);
             return posts.filter(post => post.createdBy === user.id);
         }
     },
