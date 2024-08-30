@@ -43,7 +43,39 @@ const users = [
         email: "david@example.com",
         city: "San Francisco",
         role: "nurse"
-    }
+    },
+    {
+        id: uuid(),
+        name: "James",
+        phone: "987654321",
+        email: "jame@email.com",
+        city: "Los Angeles",
+        role: "patient"
+    },
+    {
+        id: uuid(),
+        name: "Michael",
+        phone: "987654321",
+        email: "michael@email.com",
+        city: "Miami",
+        role: "patient"
+    },
+    {
+        id: uuid(),
+        name: "Robert",
+        phone: "987654321",
+        email: "robert@email.com",
+        city: "New York",
+        role: "patient"
+    },
+    {
+        id: uuid(),
+        name: "William",
+        phone: "987654321",
+        email: "william" + "@email.com",
+        city: "Chicago",
+        role: "patient"
+    },
 
 ];
 
@@ -144,6 +176,90 @@ const appointments = [
         patient: users[2].id,
         specialist: users[0].id,
         date: "2024-09-14",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-15",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-16",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-17",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-18",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-19",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-20",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-21",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-22",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-23",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-24",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-25",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-26",
         status: "accepted"
     }
 ];
