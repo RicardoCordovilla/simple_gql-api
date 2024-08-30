@@ -1,9 +1,9 @@
 
 
 import { ApolloServer, gql } from 'apollo-server';
-import {v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-const users = [
+let users = [
     {
         name: "Jhon",
         phone: "092354454",
@@ -79,7 +79,7 @@ const users = [
 
 ];
 
-const appointments = [
+let appointments = [
     {
         id: uuid(),
         patient: users[1].id,
@@ -91,7 +91,7 @@ const appointments = [
         id: uuid(),
         patient: users[2].id,
         specialist: users[0].id,
-        date: "2024-09-02",        
+        date: "2024-09-02",
         status: "accepted"
     },
     {
@@ -112,28 +112,28 @@ const appointments = [
         id: uuid(),
         patient: users[1].id,
         specialist: users[0].id,
-        date: "2024-09-05",
+        date: "2024-09-04",
         status: "pending"
     },
     {
         id: uuid(),
         patient: users[2].id,
         specialist: users[0].id,
-        date: "2024-09-06",
+        date: "2024-09-04",
         status: "accepted"
     },
     {
         id: uuid(),
         patient: users[1].id,
         specialist: users[2].id,
-        date: "2024-09-07",
+        date: "2024-09-04",
         status: "pending"
     },
     {
         id: uuid(),
         patient: users[2].id,
         specialist: users[2].id,
-        date: "2024-09-08",
+        date: "2024-09-04",
         status: "accepted"
     },
     {
@@ -154,7 +154,35 @@ const appointments = [
         id: uuid(),
         patient: users[1].id,
         specialist: users[2].id,
+        date: "2024-09-10",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-10",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
         date: "2024-09-11",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-11",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-12",
         status: "pending"
     },
     {
@@ -168,7 +196,35 @@ const appointments = [
         id: uuid(),
         patient: users[1].id,
         specialist: users[0].id,
+        date: "2024-09-12",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-12",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
         date: "2024-09-13",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-14",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-14",
         status: "pending"
     },
     {
@@ -182,84 +238,28 @@ const appointments = [
         id: uuid(),
         patient: users[1].id,
         specialist: users[2].id,
+        date: "2024-09-14",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-14",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
         date: "2024-09-15",
         status: "pending"
     },
     {
         id: uuid(),
         patient: users[2].id,
-        specialist: users[2].id,
-        date: "2024-09-16",
-        status: "accepted"
-    },
-    {
-        id: uuid(),
-        patient: users[1].id,
         specialist: users[0].id,
-        date: "2024-09-17",
-        status: "pending"
-    },
-    {
-        id: uuid(),
-        patient: users[2].id,
-        specialist: users[0].id,
-        date: "2024-09-18",
-        status: "accepted"
-    },
-    {
-        id: uuid(),
-        patient: users[1].id,
-        specialist: users[2].id,
-        date: "2024-09-19",
-        status: "pending"
-    },
-    {
-        id: uuid(),
-        patient: users[2].id,
-        specialist: users[2].id,
-        date: "2024-09-20",
-        status: "accepted"
-    },
-    {
-        id: uuid(),
-        patient: users[1].id,
-        specialist: users[0].id,
-        date: "2024-09-21",
-        status: "pending"
-    },
-    {
-        id: uuid(),
-        patient: users[2].id,
-        specialist: users[0].id,
-        date: "2024-09-22",
-        status: "accepted"
-    },
-    {
-        id: uuid(),
-        patient: users[1].id,
-        specialist: users[2].id,
-        date: "2024-09-23",
-        status: "pending"
-    },
-    {
-        id: uuid(),
-        patient: users[2].id,
-        specialist: users[2].id,
-        date: "2024-09-24",
-        status: "accepted"
-    },
-    {
-        id: uuid(),
-        patient: users[1].id,
-        specialist: users[0].id,
-        date: "2024-09-25",
-        status: "pending"
-    },
-    {
-        id: uuid(),
-        patient: users[2].id,
-        specialist: users[0].id,
-        date: "2024-09-26",
+        date: "2024-09-15",
         status: "accepted"
     }
 ];
@@ -288,11 +288,28 @@ const typeDefs = gql`
         findUser(name: String!): [User]!
         allAppointmets: [Appointment]!
         findAppointmetsByUser(name: String!): [Appointment]
+        listSpecialists: [User]
+        listPatients: [User]
         findAppointmetsBySpecialist(name: String!): [Appointment]
         findAppointmetsByStatus(status: String!): [Appointment]
         findAppointmetsByDate(date: String!): [Appointment]
     }
 
+    type Mutation {
+        createUser(
+            name: String!
+            phone: String
+            email: String!
+            city: String
+        ): User
+
+        addAppointment(
+            patient: ID!
+            specialist: ID!
+            date: String!
+            status: String!
+        ): Appointment
+    }
 `;
 
 const resolvers = {
@@ -300,6 +317,8 @@ const resolvers = {
         userCount: () => users.length,
         allUsers: () => users,
         findUser: (root, args) => users.filter(user => user.name === args.name),
+        listSpecialists: () => users.filter(user => user.role === "specialist"),
+        listPatients: () => users.filter(user => user.role === "patient"),
         allAppointmets: () => appointments,
         findAppointmetsByUser: (root, args) => {
             const user = users.find(user => user.name === args.name);
@@ -312,6 +331,20 @@ const resolvers = {
         findAppointmetsByStatus: (root, args) => appointments.filter(appointment => appointment.status === args.status),
         findAppointmetsByDate: (root, args) => appointments.filter(appointment => appointment.date === args.date)
     },
+
+    Mutation: {
+        createUser: (root, args) => {
+            const user = { ...args, id: uuid() };
+            users = users.concat(user);
+            return user;
+        },
+        addAppointment: (root, args) => {
+            const appointment = { ...args, id: uuid() };
+            appointments = appointments.concat(appointment);
+            return appointment;
+        }
+    },
+
     Appointment: {
         patient: (root) => users.find(user => user.id === root.patient),
         specialist: (root) => users.find(user => user.id === root.specialist)
