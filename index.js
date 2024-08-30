@@ -1,123 +1,153 @@
+
+
 import { ApolloServer, gql } from 'apollo-server';
 import {v4 as uuid } from 'uuid';
 
 const users = [
     {
-        name: "Ricardo",
+        name: "Jhon",
         phone: "092354454",
         email: "ricado@email.com",
-        city: "Quito",
-        id: uuid()
+        city: "New York",
+        id: uuid(),
+        role: "specialist"
     },
     {
-        name: "Maria",
-        phone: "09332354512",
-        email: "maria@email.com",
-        city: "Guayaquil",
-        id: uuid()
+        name: "Emily",
+        phone: "092354342",
+        email: "emily@email.com",
+        city: "Chicago",
+        id: uuid(),
+        role: "patient"
     },
     {
-        name: "Juan",
-        phone: "0925648544",
-        email: "juan@email.com",
-        city: "Cuenca",
-        id: uuid()
+        id: uuid(),
+        name: "Sarah",
+        phone: "789123456",
+        email: "sarah@example.com",
+        city: "Houston",
+        role: "specialist"
     },
     {
-        name: "Pedro",
-        phone: "092356554",
-        email: "pedro@email.com",
-        city: "Manta",
-        id: uuid()
+        id: uuid(),
+        name: "Jessica",
+        phone: "321654987",
+        email: "jessica@example.com",
+        city: "Miami",
+        role: "nurse",
+    },
+    {
+        id: uuid(),
+        name: "David",
+        phone: "654987321",
+        email: "david@example.com",
+        city: "San Francisco",
+        role: "nurse"
+    }
+
+];
+
+const appointments = [
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-01",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-02",        
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-03",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-04",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-05",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-06",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-07",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-08",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-09",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-10",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[2].id,
+        date: "2024-09-11",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[2].id,
+        date: "2024-09-12",
+        status: "accepted"
+    },
+    {
+        id: uuid(),
+        patient: users[1].id,
+        specialist: users[0].id,
+        date: "2024-09-13",
+        status: "pending"
+    },
+    {
+        id: uuid(),
+        patient: users[2].id,
+        specialist: users[0].id,
+        date: "2024-09-14",
+        status: "accepted"
     }
 ];
 
-const posts = [
-    {
-        id: uuid(),
-        title: "Post1 por Ricardo",
-        body: "Aprendiendo GraphQL con Apollo, muy interesante, espero aprender mucho", 
-        published: true,
-        createdBy: users[0].id
-    },
-    {
-        id: uuid(),
-        title: "Post2 por Ricardo",
-        body: "Creando un servidor con Apollo Server, se ha vuelto muy sencillo", 
-        published: true,
-        createdBy: users[0].id
-    },
-    {
-        id: uuid(),
-        title: "Post1 por Maria",
-        body: "La documentación de Apollo Server es muy completa, me ha ayudado mucho", 
-        published: true,
-        createdBy: users[1].id
-    },
-    {
-        id: uuid(),
-        title: "Post2 por Maria",
-        body: "Siguiente paso, aprender a usar Apollo Client", 
-        published: true,
-        createdBy: users[1].id
-    },
-    {
-        id: uuid(),
-        title: "Post1 por Juan",
-        body: "Abriendo el localhost:4000, veo que todo está funcionando correctamente", 
-        published: true,
-        createdBy: users[2].id
-    },
-    {
-        id: uuid(),
-        title: "Post2 por Juan",
-        body: "Haciendo consultas query para obtener los usuarios y los posts", 
-        published: true,
-        createdBy: users[2].id
-    },
-    {
-        id: uuid(),
-        title: "Post1 por Pedro",
-        body: "Hay que hacer consultas mutation para agregar usuarios y posts", 
-        published: true,
-        createdBy: users[3].id
-    },
-    {
-        id: uuid(),
-        title: "Post2 por Pedro",
-        body: "Los paramtros que se debe enviar en las consultas mutation en los campos requeridos", 
-        published: true,
-        createdBy: users[2].id
-    },
-    {
-        id: uuid(),
-        title: "Post3 por Pedro",
-        body: "Los campos requeridos son los que tienen el signo de exclamación", 
-        published: true,
-        createdBy: users[2].id
-    },
-    {
-        id: uuid(),
-        title: "Post4 por Pedro",
-        body: "Ahora vamos a hacer una aplicación con React y Apollo Client", 
-        published: true,
-        createdBy: users[1].id
-    },
-    {
-        id: uuid(),
-        title: "Post5 por Pedro",
-        body: "Usaremos tailwindcss para darle estilo a la aplicación", 
-        published: true,
-        createdBy: users[2].id
-    },
-    {
-        id: uuid(),
-        title: "Post6 por Pedro",
-        body: "Usaremos typescript para tener un código más limpio y seguro, es una buena práctica", 
-        published: true,
-        createdBy: users[1].id
-    }
-];
 
 const typeDefs = gql`
     type User {
@@ -128,63 +158,47 @@ const typeDefs = gql`
         id: ID!
     }
     
-    type Post {
+    type Appointment {
         id: ID!
-        title: String!
-        body: String!
-        published: Boolean!
-        createdBy: User!
+        patient: User!
+        specialist: User!
+        date: String!
+        status: String!
     }
 
     type Query {
         userCount: Int!
         allUsers: [User]!
         findUser(name: String!): [User]!
-        allPosts: [Post]!
-        findPostsByUser(name: String!): [Post]
+        allAppointmets: [Appointment]!
+        findAppointmetsByUser(name: String!): [Appointment]
+        findAppointmetsBySpecialist(name: String!): [Appointment]
+        findAppointmetsByStatus(status: String!): [Appointment]
+        findAppointmetsByDate(date: String!): [Appointment]
     }
 
-    type Mutation {
-        addUser(
-            name: String!
-            phone: String
-            email: String!
-            city: String
-        ): User
-        addPost(
-            title: String!
-            body: String!
-            published: Boolean!
-            createdBy: ID!
-        ): Post
-    }
 `;
 
 const resolvers = {
     Query: {
         userCount: () => users.length,
         allUsers: () => users,
-        findUser: (root, args) => users.filter(user => user.id === args.id),
-        allPosts: () => posts,
-        findPostsByUser: (root, args) => {
-            const user = users.find(user => user.id === args.id);
-            return posts.filter(post => post.createdBy === user.id);
-        }
-    },
-    Mutation: {
-        addUser: (root, args) => {
-            const user = { ...args, id: uuid() };
-            users.push(user);
-            return user;
+        findUser: (root, args) => users.filter(user => user.name === args.name),
+        allAppointmets: () => appointments,
+        findAppointmetsByUser: (root, args) => {
+            const user = users.find(user => user.name === args.name);
+            return appointments.filter(appointment => appointment.patient === user.id);
         },
-        addPost: (root, args) => {
-            const post = { ...args, id: uuid() };
-            posts.push(post);
-            return post;
-        }
+        findAppointmetsBySpecialist: (root, args) => {
+            const user = users.find(user => user.name === args.name);
+            return appointments.filter(appointment => appointment.specialist === user.id);
+        },
+        findAppointmetsByStatus: (root, args) => appointments.filter(appointment => appointment.status === args.status),
+        findAppointmetsByDate: (root, args) => appointments.filter(appointment => appointment.date === args.date)
     },
-    Post: {
-        createdBy: (root) => users.find(user => user.id === root.createdBy)
+    Appointment: {
+        patient: (root) => users.find(user => user.id === root.patient),
+        specialist: (root) => users.find(user => user.id === root.specialist)
     }
 };
 
