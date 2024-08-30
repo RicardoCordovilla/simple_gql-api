@@ -113,7 +113,7 @@ const posts = [
     {
         id: uuid(),
         title: "Post6 por Pedro",
-        body: "Usaremos typescript para tener un código más limpio y seguro", 
+        body: "Usaremos typescript para tener un código más limpio y seguro, es una buena práctica", 
         published: true,
         createdBy: users[1].id
     }
